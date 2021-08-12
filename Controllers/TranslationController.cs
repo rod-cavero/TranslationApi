@@ -39,7 +39,7 @@ namespace TranslationApi.Controllers
             }
         }
 
-        private bool Translate(ref Translation toTranslate)
+        private static bool Translate(ref Translation toTranslate)
         {
             bool ret = false;
 
@@ -50,34 +50,32 @@ namespace TranslationApi.Controllers
                     toTranslate.SourceLanguage, toTranslate.TargetLanguage, Uri.EscapeUriString(toTranslate.Text));
 
                 //set the client for request
-                using (var httpClient = new HttpClient())
+                using var httpClient = new HttpClient();
+                //make the request to google api
+                var response = httpClient.GetAsync(uri);
+                response.Wait();
+
+                //get the result from the request
+                var result = response.Result;
+                if (result.IsSuccessStatusCode)
                 {
-                    //make the request to google api
-                    var response = httpClient.GetAsync(uri);
-                    response.Wait();
+                    //if the api call was succesfull extract the data returned
 
-                    //get the result from the request
-                    var result = response.Result;
-                    if (result.IsSuccessStatusCode)
+                    string dataResult = result.Content.ReadAsStringAsync().Result;
+                    var jsonData = JsonSerializer.Deserialize<List<dynamic>>(dataResult);
+                    //take the first element of the list
+                    //where the translation is
+                    JsonElement jsonElement = jsonData[0];
+                    //the third element has the source launge in case of request for auto detect
+                    toTranslate.SourceLanguage = Convert.ToString(jsonData[2]);
+
+                    //extract every translated sentece to join in a single string
+                    foreach (var element in jsonElement.EnumerateArray())
                     {
-                        //if the api call was succesfull extract the data returned
-
-                        string dataResult = result.Content.ReadAsStringAsync().Result;
-                        var jsonData = JsonSerializer.Deserialize<List<dynamic>>(dataResult);
-                        //take the first element of the list
-                        //where the translation is
-                        JsonElement jsonElement = jsonData[0];
-                        //the third element has the source launge in case of request for auto detect
-                        toTranslate.SourceLanguage = Convert.ToString(jsonData[2]);
-
-                        //extract every translated sentece to join in a single string
-                        foreach (var element in jsonElement.EnumerateArray())
-                        {
-                            toTranslate.Translated += Convert.ToString(element[0]);
-                        }
-                        //every was succesful return true
-                        ret = true;
+                        toTranslate.Translated += Convert.ToString(element[0]);
                     }
+                    //every was succesful return true
+                    ret = true;
                 }
             }
             catch { }
