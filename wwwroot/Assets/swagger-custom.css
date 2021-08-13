@@ -10,7 +10,7 @@
     display: block;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    background: url(/images/avatar.png) no-repeat ;
+    background: url(/Assets/avatar.png) no-repeat ;
     height: 90px; 
 }
 

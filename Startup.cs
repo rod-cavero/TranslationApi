@@ -66,7 +66,7 @@ namespace TranslationApi
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TranslationApi v1");
-                    c.InjectStylesheet("/css/swagger-custom.css");
+                    c.InjectStylesheet("/Assets/swagger-custom.css");
                 });
             }
 
