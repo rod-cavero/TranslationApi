@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace TranslationApi.Controllers
 {
@@ -23,14 +24,15 @@ namespace TranslationApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Translation> Get(Translation toTranslate)
+        public ActionResult<Translation> Get([FromQuery][Required] string text, [FromQuery][Required] string target, string source = "auto")
         {
-           //call the function to do the translation, passing by reference the class with the data
-            if (Translate(ref toTranslate))
+            Translation translated = new();
+            //call the function to do the translation, passing by reference the class with the data
+            if (Translate(text, target, source, ref translated))
             {
                 //the function returns all the information in the same class
                 //which is the one the api return
-                return toTranslate;
+                return translated;
             }
             else
             {
@@ -39,7 +41,7 @@ namespace TranslationApi.Controllers
             }
         }
 
-        private static bool Translate(ref Translation toTranslate)
+        private static bool Translate(string text, string target, string source, ref Translation translated)
         {
             bool ret = false;
 
@@ -47,7 +49,7 @@ namespace TranslationApi.Controllers
             {
                 //Set the url to request google api
                 string uri = String.Format("https://translate.googleapis.com/translate_a/single?client=gtx&sl={0}&tl={1}&dt=t&q={2}",
-                    toTranslate.SourceLanguage, toTranslate.TargetLanguage, Uri.EscapeUriString(toTranslate.Text));
+                    source, target, Uri.EscapeUriString(text));
 
                 //set the client for request
                 using var httpClient = new HttpClient();
@@ -67,12 +69,12 @@ namespace TranslationApi.Controllers
                     //where the translation is
                     JsonElement jsonElement = jsonData[0];
                     //the third element has the source launge in case of request for auto detect
-                    toTranslate.SourceLanguage = Convert.ToString(jsonData[2]);
+                    translated.DetectedLanguage = Convert.ToString(jsonData[2]);
 
                     //extract every translated sentece to join in a single string
                     foreach (var element in jsonElement.EnumerateArray())
                     {
-                        toTranslate.Translated += Convert.ToString(element[0]);
+                        translated.Translated += Convert.ToString(element[0]);
                     }
                     //every was succesful return true
                     ret = true;
