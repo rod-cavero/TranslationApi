@@ -28,15 +28,15 @@ Basic Usage
 localhost:5000/api/Translation?text=hello&target=de&source=en
 ```
 QueryString:
-* ***text The text to be translated
-* ***target The target language for the trnaslation
-* ***source The source language of the trnaslation (set 'auto' for auto detect language)
+* text The text to be translated
+* target The target language for the trnaslation
+* source The source language of the trnaslation (set 'auto' for auto detect language)
 ***
 
 
 Prerequisites
 ====
-* ***Microsoft .net core 5
+* Microsoft .net core 5
 ***
 
 
