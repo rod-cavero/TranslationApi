@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
-ENV ASPNETCORE_ENVIRONMENT=Development
+#ENV ASPNETCORE_ENVIRONMENT=Development
 EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build

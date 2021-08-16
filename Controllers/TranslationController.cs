@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Cors;
 
 namespace TranslationApi.Controllers
 {
@@ -23,6 +24,7 @@ namespace TranslationApi.Controllers
             _logger = logger;
         }
 
+        [EnableCors("DemoPolicy")]
         [HttpGet]
         public ActionResult<Translation> Get([FromQuery][Required] string text, [FromQuery][Required] string target, string source = "auto")
         {

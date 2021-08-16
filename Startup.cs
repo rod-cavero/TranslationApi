@@ -27,6 +27,16 @@ namespace TranslationApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DemoPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("*")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -61,16 +71,20 @@ namespace TranslationApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseStaticFiles();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TranslationApi v1");
-                    c.InjectStylesheet("/Assets/swagger-custom.css");
-                });
             }
 
+            app.UseSwagger();
+            app.UseStaticFiles();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TranslationApi v1");
+                c.InjectStylesheet("/Assets/swagger-custom.css");
+            });
+            
+
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
