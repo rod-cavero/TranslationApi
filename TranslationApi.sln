@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslationApi", "TranslationApi.csproj", "{482E05F4-73AC-4FB1-8400-0C0A7512743C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslationApi", "TranslationApi\TranslationApi.csproj", "{482E05F4-73AC-4FB1-8400-0C0A7512743C}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{D4EC9907-E0D2-4012-BD0D-30DAB7FA6E7A}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "TranslationApi\docker-compose.dcproj", "{D4EC9907-E0D2-4012-BD0D-30DAB7FA6E7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationApi.Unit.Test", "TranslationApi.Unit.Test\TranslationApi.Unit.Test.csproj", "{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D4EC9907-E0D2-4012-BD0D-30DAB7FA6E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4EC9907-E0D2-4012-BD0D-30DAB7FA6E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4EC9907-E0D2-4012-BD0D-30DAB7FA6E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
