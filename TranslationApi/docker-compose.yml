@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY-}translationapi
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: TranslationApi/Dockerfile
