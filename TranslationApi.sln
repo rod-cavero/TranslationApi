@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslationApi", "Translati
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "TranslationApi\docker-compose.dcproj", "{D4EC9907-E0D2-4012-BD0D-30DAB7FA6E7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationApi.Unit.Test", "TranslationApi.Unit.Test\TranslationApi.Unit.Test.csproj", "{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslationApi.Unit.Test", "TranslationApi.Unit.Test\TranslationApi.Unit.Test.csproj", "{3096E5FB-F1FC-465A-BAA3-9CCBF0C931D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECFF3B12-B2E1-4549-BEF3-F533740B3A11}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Cors;
+using System.Net;
 
 namespace TranslationApi.Controllers
 {
@@ -34,12 +35,12 @@ namespace TranslationApi.Controllers
             {
                 //the function returns all the information in the same class
                 //which is the one the api return
-                return translated;
+                return Ok(translated);
             }
             else
             {
                 //if the function fail, raise a internal server error
-                return StatusCode(500);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }
 
